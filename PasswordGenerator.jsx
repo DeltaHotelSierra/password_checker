@@ -1,6 +1,17 @@
 const { useState, useEffect } = React;
 
 function PasswordGenerator() {
+    // Menu items configuration
+    const menuItems = [
+        { label: 'Generator', link: 'index.html' },
+        { label: 'Tester', link: 'tester.html' }
+    ];
+
+    const socialItems = [
+        { label: 'GitHub', link: 'https://github.com/deltahotelsierra/password_checker' },
+        { label: 'Email', link: 'mailto:deltahotelsierra@hotmail.com' }
+    ];
+
     const [password, setPassword] = useState('');
     const [length, setLength] = useState(12);
     const [options, setOptions] = useState({
@@ -126,6 +137,16 @@ function PasswordGenerator() {
 
     return (
         <>
+            <StaggeredMenu 
+                items={menuItems}
+                socialItems={socialItems}
+                position="right"
+                colors={{
+                    background: '#0a0a0a',
+                    accent: '#4CAF50',
+                    text: '#ffffff'
+                }}
+            />
             <LetterGlitch 
                 glitchColors={['#2b4539', '#61dca3', '#61b3dc']}
                 glitchSpeed={50}
