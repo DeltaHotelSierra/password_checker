@@ -27,8 +27,11 @@ function MainApp() {
                 }}
             />
             <LetterGlitch 
-                glitchColors={['#2b4539', '#61dca3', '#61b3dc']}
-                glitchSpeed={50}
+                glitchColors={[
+                    '#2b4539', 
+                    '#61dca3', 
+                    '#024706']}
+                glitchSpeed={2}
                 smooth={true}
                 centerVignette={false}
                 outerVignette={true}
