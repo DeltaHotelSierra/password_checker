@@ -31,6 +31,17 @@ function PasswordGenerator() {
     const generatePassword = useCallback(() => {
         let availableChars = '';
         let generatedPassword = '';
+        
+        // If no options selected, select all options
+        if (!options.uppercase 
+            && !options.lowercase 
+            && !options.numbers
+            && !options.special) {
+            options.special = true;
+            options.numbers = true;
+            options.lowercase = true;
+            options.uppercase = true;
+        }
 
         // Build character set based on selected options
         if (options.uppercase) availableChars += charSets.uppercase;
@@ -165,7 +176,7 @@ function PasswordGenerator() {
                                 </span>
                             ))
                         ) : (
-                            <span className="password-placeholder">Click generate to create password</span>
+                            <span className="password-placeholder">no password</span>
                         )}
                     </div>
                     <button
@@ -275,7 +286,7 @@ function PasswordGenerator() {
 
                 {/* Generate Button */}
                 <button onClick={generatePassword} className="generate-button">
-                    Generate Password
+                    Generate Random Password
                 </button>
         </div>
     );
