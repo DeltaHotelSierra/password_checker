@@ -1402,10 +1402,16 @@ body {
    SECURITY TIPS SECTION
    =================================== */
 
-.security-tips-section {
-    max-width: 1200px;
-    margin: 60px auto;
+.tips-snap-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 40px 20px;
+}
+
+.security-tips-section {
+    width: 100%;
+    max-width: 1200px;
 }
 
 .tips-title {

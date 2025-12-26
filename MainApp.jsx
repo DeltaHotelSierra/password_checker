@@ -64,6 +64,11 @@ function MainApp() {
                     </div>
                 </section>
 
+                {/* SECURITY TIPS SECTION - Password best practices */}
+                <section id="tips" className="snap-section tips-snap-section">
+                    <SecurityTips />
+                </section>
+
                 {/* FOOTER SECTION - About, links, and credits */}
                 <section id="footer" className="snap-section footer-section">
                     <div className="footer-content">
