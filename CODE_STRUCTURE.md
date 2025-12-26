@@ -17,14 +17,12 @@ SecureEnough is a web-based password generator and strength analyzer. It allows 
 index.html                    - Entry point - loads all components and styles
 MainApp.jsx                  - Root component that manages page layout
 styles.css                   - All styling for the website
-StaggeredMenu.css           - Styling for the hamburger menu
 ```
 
 ### React Components (Self-Contained Features)
 
 ```
 MainApp.jsx                  - Main layout and page structure
-├── StaggeredMenu.jsx        - Animated hamburger navigation menu
 ├── LetterGlitch.js          - Matrix-style animated background
 ├── PasswordGenerator.jsx     - Password creation tool
 └── PasswordStrengthTester.jsx - Password testing and analysis tool
@@ -108,19 +106,7 @@ Very Strong: 85+  | Dark Green
 
 ---
 
-### 4. **StaggeredMenu.jsx** 🍔
-**What it does:** The animated hamburger menu on the right side
-
-**Features:**
-- Slides in from the right when clicked
-- Smooth animations using GSAP (a professional animation library)
-- Navigation links to different sections
-- Social media links (GitHub, Email)
-- Changes color on hover/interaction
-
----
-
-### 5. **MainApp.jsx** 🏠
+### 4. **MainApp.jsx** 🏠
 **What it does:** Glues everything together and manages the page layout
 
 **Page Structure (4 Full-Screen Sections):**

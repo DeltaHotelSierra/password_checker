@@ -6,39 +6,8 @@ const { useState, useEffect } = React;
  * Combines all child components: Menu, Background, and Main Content
  */
 function MainApp() {
-    // ===== NAVIGATION MENU ITEMS =====
-    // Links shown in the hamburger menu for easy navigation
-    const menuItems = [
-        { label: 'Home', link: '#home' },
-        { label: 'Generator', link: '#generator' },
-        { label: 'Tester', link: '#tester' },
-        { label: 'About', link: '#footer' }
-    ];
-
-    // ===== SOCIAL MEDIA LINKS =====
-    // External links shown at the bottom of the menu
-    const socialItems = [
-        { label: 'GitHub', link: 'https://github.com/deltahotelsierra/password_checker' },
-        { label: 'Email', link: 'mailto:deltahotelsierra@hotmail.com' }
-    ];
-
     return (
         <>
-            {/* ===== ANIMATED MENU =====
-                Right-side hamburger menu with navigation and social links
-                Uses GSAP animations for smooth transitions
-            */}
-            <StaggeredMenu 
-                items={menuItems}
-                socialItems={socialItems}
-                position="right"
-                colors={{
-                    background: '#0a0a0a',
-                    accent: '#4CAF50',
-                    text: '#ffffff'
-                }}
-            />
-
             {/* ===== BACKGROUND ANIMATION =====
                 Matrix-style animated letter glitch effect
                 Fills entire background, stays behind all content
