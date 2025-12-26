@@ -5,10 +5,12 @@ A modern web-based password strength tester and generator with an animated lette
 ## 🌟 Features
 
 ### 🏠 Home Section
+
 - Welcome page with hero content
 - Call-to-action buttons for quick navigation
 
 ### 🔐 Password Generator
+
 - 🎲 **Random Password Generation** - Create secure passwords instantly
 - 📏 **Adjustable Length** - Slider control from 4 to 32 characters
 - 🔧 **Character Options**:
@@ -21,6 +23,7 @@ A modern web-based password strength tester and generator with an animated lette
 - ✏️ **Click to Edit** - Click individual characters to randomly change them
 
 ### 🧪 Password Tester
+
 - 🔍 **Single Password Testing** - Test individual passwords in real-time
 - 📦 **Bulk Password Analysis** - Analyze multiple passwords at once
   - Overall security score
@@ -37,16 +40,17 @@ A modern web-based password strength tester and generator with an animated lette
 - 👁️ **Show/Hide Password** - Toggle password visibility
 - 📈 **Visual Progress Bar** - Color-coded strength indicator
 
-### 📚 Security Tips Section
-- 4 interactive tip cards covering:
-  - Length is King (📏)
-  - Complexity Matters (🔤)
-  - Avoid Common Patterns (🚫)
-  - Use a Password Manager (🔐)
-- Click any tip to see detailed explanations, examples, and references
-- Modal popups with comprehensive security information
+### 📚 What Makes a Secure Password in 2025?
+
+- 📏 **Length is King** - Longer passwords exponentially increase security through entropy
+- 🔤 **Complexity Matters** - Mix uppercase, lowercase, numbers, and special characters
+- 🚫 **Avoid Common Patterns** - Stay away from dictionary words, personal info, and predictable patterns
+- 🔐 **Use a Password Manager** - Let technology handle the complexity of creating and storing unique passwords
+- 📖 **Interactive Learning** - Click any tip card to see detailed explanations, examples, and references
+- 💬 **Modal Popups** - Comprehensive security information with key points and real-world examples
 
 ### ✨ Animated Background
+
 - **Letter Glitch Animation** - Matrix-style animated background
 - Customizable colors (teal/green theme)
 - Smooth opacity transitions
@@ -70,6 +74,7 @@ cd password_checker
 ```
 
 2. **Open in browser**:
+
    - Simply open `index.html` in your web browser
    - Or double-click the file
 
@@ -98,7 +103,7 @@ password-strength-tester/
 
 ### Generate Passwords:
 
-1. Open `index.html` 
+1. Open `index.html`
 2. Scroll to **Generator** section
 3. Adjust the length slider (4-32 characters)
 4. Select character types to include
@@ -192,6 +197,7 @@ python password_tester.py
 ## 📖 Learning Resources
 
 Check out `CODE_STRUCTURE.md` for:
+
 - Detailed explanation of each component
 - React hooks overview
 - Data flow diagrams
