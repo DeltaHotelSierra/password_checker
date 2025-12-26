@@ -1,11 +1,28 @@
 const { useState, useEffect } = React;
 
+/**
+ * PasswordStrengthTester Component
+ * Allows users to test passwords and get detailed strength analysis
+ * Supports both single password testing and bulk analysis
+ */
 function PasswordStrengthTester() {
-    const [mode, setMode] = useState('single'); // 'single' or 'bulk'
+    // ===== STATE VARIABLES =====
+    // 'single' = test one password | 'bulk' = test multiple passwords
+    const [mode, setMode] = useState('single');
+    
+    // Stores the password being tested in single mode
     const [password, setPassword] = useState('');
+    
+    // Controls whether password text is visible or masked
     const [showPassword, setShowPassword] = useState(false);
+    
+    // Current password strength level (e.g., "Strong", "Weak")
     const [strength, setStrength] = useState('Very Weak');
+    
+    // Numeric score for password strength (0-100)
     const [score, setScore] = useState(0);
+    
+    // Tracks which security criteria the password meets
     const [criteriaMet, setCriteriaMet] = useState({
         length: false,
         uppercase: false,
@@ -14,11 +31,18 @@ function PasswordStrengthTester() {
         special: false
     });
 
-    // Bulk testing state
+    // ===== BULK TESTING STATE =====
+    // Array of password objects: { id, value }
     const [bulkPasswords, setBulkPasswords] = useState([{ id: 1, value: '' }]);
+    
+    // Results from bulk password analysis
     const [bulkResults, setBulkResults] = useState(null);
+    
+    // Which security tip popup is currently open (if any)
     const [openPopup, setOpenPopup] = useState(null);
 
+    // ===== COLOR MAPPING =====
+    // Maps strength levels to color codes for visual feedback
     const strengthColors = {
         'Very Weak': '#d32f2f',
         'Weak': '#f57c00',
@@ -27,6 +51,12 @@ function PasswordStrengthTester() {
         'Very Strong': '#388e3c'
     };
 
+    /**
+     * Evaluates password strength based on length, character types, and patterns
+     * Returns strength level, numerical score, and which criteria are met
+     * @param {string} pwd - Password to analyze
+     * @returns {object} - { strength, score, criteriaMet }
+     */
     const checkPasswordStrength = (pwd) => {
         let calculatedScore = 0;
         const newCriteriaMet = {
@@ -37,47 +67,49 @@ function PasswordStrengthTester() {
             special: false
         };
 
+        // Return early if password is empty
         if (pwd.length === 0) {
             return { strength: 'Very Weak', score: 0, criteriaMet: newCriteriaMet };
         }
 
-        // Check length
+        // ===== LENGTH SCORING =====
+        // Points for having minimum length (most important factor)
         if (pwd.length >= 8) {
             calculatedScore += 20;
             newCriteriaMet.length = true;
         }
-        if (pwd.length >= 12) {
-            calculatedScore += 10;
-        }
-        if (pwd.length >= 16) {
-            calculatedScore += 10;
-        }
+        if (pwd.length >= 12) calculatedScore += 10;
+        if (pwd.length >= 16) calculatedScore += 10;
 
-        // Check for uppercase
+        // ===== CHARACTER TYPE SCORING =====
+        // Points for character variety (harder to crack with dictionary attacks)
+        
+        // Check for uppercase letters (A-Z)
         if (/[A-Z]/.test(pwd)) {
             calculatedScore += 15;
             newCriteriaMet.uppercase = true;
         }
 
-        // Check for lowercase
+        // Check for lowercase letters (a-z)
         if (/[a-z]/.test(pwd)) {
             calculatedScore += 15;
             newCriteriaMet.lowercase = true;
         }
 
-        // Check for numbers
+        // Check for numbers (0-9)
         if (/\d/.test(pwd)) {
             calculatedScore += 15;
             newCriteriaMet.number = true;
         }
 
-        // Check for special characters
+        // Check for special characters (!@#$%^&* etc.)
         if (/[!@#$%^&*()_+\-=\[\]{};:'",.<>?/\\|`~]/.test(pwd)) {
             calculatedScore += 15;
             newCriteriaMet.special = true;
         }
 
-        // Determine strength level
+        // ===== DETERMINE STRENGTH LEVEL =====
+        // Map the score to user-friendly strength descriptions
         let strengthLevel;
         if (calculatedScore < 30) {
             strengthLevel = 'Very Weak';
@@ -94,15 +126,22 @@ function PasswordStrengthTester() {
         return { strength: strengthLevel, score: calculatedScore, criteriaMet: newCriteriaMet };
     };
 
+    /**
+     * Analyzes all passwords in bulk mode and generates statistics
+     * Calculates: average score, overall strength, distribution of strength levels
+     */
     const analyzeBulkPasswords = () => {
+        // Filter out empty passwords and whitespace
         const passwords = bulkPasswords
             .map(p => p.value.trim())
             .filter(p => p.length > 0);
 
+        // Do nothing if no passwords to analyze
         if (passwords.length === 0) {
             return;
         }
 
+        // Test each password and collect results
         const results = passwords.map(pwd => {
             const result = checkPasswordStrength(pwd);
             return {
@@ -112,9 +151,12 @@ function PasswordStrengthTester() {
             };
         });
 
+        // ===== CALCULATE STATISTICS =====
+        // Sum all scores and divide by count for average
         const totalScore = results.reduce((sum, r) => sum + r.score, 0);
         const averageScore = totalScore / results.length;
 
+        // Count how many passwords fall into each strength category
         const strengthCounts = {
             'Very Weak': 0,
             'Weak': 0,
@@ -127,6 +169,7 @@ function PasswordStrengthTester() {
             strengthCounts[r.strength]++;
         });
 
+        // Determine overall strength based on average score
         let overallStrength;
         if (averageScore < 30) {
             overallStrength = 'Very Weak';
@@ -140,6 +183,7 @@ function PasswordStrengthTester() {
             overallStrength = 'Very Strong';
         }
 
+        // Store results for display
         setBulkResults({
             passwords: results,
             averageScore: Math.round(averageScore),
@@ -149,34 +193,53 @@ function PasswordStrengthTester() {
         });
     };
 
+    /**
+     * Adds a new empty password field for bulk testing
+     */
     const addPasswordField = () => {
+        // Find the highest ID currently in use and add 1
         const newId = Math.max(...bulkPasswords.map(p => p.id)) + 1;
         setBulkPasswords([...bulkPasswords, { id: newId, value: '' }]);
     };
 
+    /**
+     * Removes a password field from bulk testing
+     * @param {number} id - The ID of the field to remove
+     */
     const removePasswordField = (id) => {
+        // Don't allow removing the last field
         if (bulkPasswords.length > 1) {
             setBulkPasswords(bulkPasswords.filter(p => p.id !== id));
         }
     };
 
+    /**
+     * Updates the value of a specific password field
+     * @param {number} id - The ID of the field to update
+     * @param {string} value - The new password value
+     */
     const updatePasswordField = (id, value) => {
         setBulkPasswords(bulkPasswords.map(p => 
             p.id === id ? { ...p, value } : p
         ));
     };
 
+    /**
+     * Handles file upload for bulk password testing
+     * Extracts passwords from text files (.txt, .csv, .log)
+     * @param {Event} event - The file input change event
+     */
     const handleFileUpload = async (event) => {
         const file = event.target.files[0];
         if (!file) return;
 
         try {
             const text = await file.text();
-            // Extract potential passwords - look for non-empty lines or words
+            // Extract passwords - look for non-empty lines or words separated by newlines/commas
             const extractedPasswords = text
                 .split(/[\n\r\s,;]+/)
                 .map(p => p.trim())
-                .filter(p => p.length >= 3 && p.length <= 128) // Reasonable password length
+                .filter(p => p.length >= 3 && p.length <= 128) // Filter by reasonable password length
                 .filter(p => p.length > 0);
 
             if (extractedPasswords.length === 0) {
@@ -184,14 +247,14 @@ function PasswordStrengthTester() {
                 return;
             }
 
-            // Create new password fields from extracted passwords
+            // Create new password fields from the extracted passwords
             const newPasswordFields = extractedPasswords.map((pwd, index) => ({
                 id: index + 1,
                 value: pwd
             }));
 
             setBulkPasswords(newPasswordFields);
-            // Clear the file input
+            // Clear the file input so same file can be selected again
             event.target.value = '';
         } catch (error) {
             console.error('Error reading file:', error);
@@ -199,6 +262,11 @@ function PasswordStrengthTester() {
         }
     };
 
+    /**
+     * Handles camera/photo upload
+     * Currently just shows a message as OCR requires external service
+     * @param {Event} event - The file input change event
+     */
     const handleCameraCapture = (event) => {
         const file = event.target.files[0];
         if (!file) return;
@@ -211,6 +279,22 @@ function PasswordStrengthTester() {
         event.target.value = '';
     };
 
+    /**
+     * Handles password input change in single mode
+     */
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    };
+
+    /**
+     * Toggles between showing and hiding the password text
+     */
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    // ===== REACT EFFECTS =====
+    // Update strength analysis whenever password changes in single mode
     useEffect(() => {
         if (mode === 'single') {
             const result = checkPasswordStrength(password);
@@ -220,14 +304,9 @@ function PasswordStrengthTester() {
         }
     }, [password, mode]);
 
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-    };
-
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
+    // ===== SECURITY TIPS DATA =====
+    // Detailed information about password security best practices
+    // Each tip can be clicked to show more details in a modal popup
     const securityTips = [
         {
             id: 1,
@@ -314,6 +393,9 @@ function PasswordStrengthTester() {
         }
     ];
 
+    // ===== PASSWORD CRITERIA =====
+    // The 5 main criteria used to evaluate password strength
+    // Users can see at a glance which criteria their password meets
     const criteria = [
         { key: 'length', text: 'At least 8 characters' },
         { key: 'uppercase', text: 'Contains uppercase letter' },

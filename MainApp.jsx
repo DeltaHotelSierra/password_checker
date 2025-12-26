@@ -1,7 +1,13 @@
 const { useState, useEffect } = React;
 
+/**
+ * MainApp Component
+ * Root component that manages the overall layout and page structure
+ * Combines all child components: Menu, Background, and Main Content
+ */
 function MainApp() {
-    // Menu items configuration
+    // ===== NAVIGATION MENU ITEMS =====
+    // Links shown in the hamburger menu for easy navigation
     const menuItems = [
         { label: 'Home', link: '#home' },
         { label: 'Generator', link: '#generator' },
@@ -9,6 +15,8 @@ function MainApp() {
         { label: 'About', link: '#footer' }
     ];
 
+    // ===== SOCIAL MEDIA LINKS =====
+    // External links shown at the bottom of the menu
     const socialItems = [
         { label: 'GitHub', link: 'https://github.com/deltahotelsierra/password_checker' },
         { label: 'Email', link: 'mailto:deltahotelsierra@hotmail.com' }
@@ -16,6 +24,10 @@ function MainApp() {
 
     return (
         <>
+            {/* ===== ANIMATED MENU =====
+                Right-side hamburger menu with navigation and social links
+                Uses GSAP animations for smooth transitions
+            */}
             <StaggeredMenu 
                 items={menuItems}
                 socialItems={socialItems}
@@ -26,19 +38,28 @@ function MainApp() {
                     text: '#ffffff'
                 }}
             />
+
+            {/* ===== BACKGROUND ANIMATION =====
+                Matrix-style animated letter glitch effect
+                Fills entire background, stays behind all content
+            */}
             <LetterGlitch 
                 glitchColors={[
-                    '#2b4539', 
-                    '#61dca3', 
-                    '#024706']}
-                glitchSpeed={2}
-                smooth={true}
-                centerVignette={false}
-                outerVignette={true}
+                    '#2b4539',   // Dark green
+                    '#61dca3',   // Light green
+                    '#024706'    // Very dark green
+                ]}
+                glitchSpeed={2}      // Update every 2ms
+                smooth={true}        // Smooth color transitions
+                centerVignette={false}   // Don't darken center
+                outerVignette={true}     // Darken edges
             />
             
+            {/* ===== MAIN CONTENT =====
+                Full-screen sections with snap scroll behavior
+            */}
             <div className="snap-container">
-                {/* Header Section */}
+                {/* HOME SECTION - Welcome and introduction */}
                 <section id="home" className="snap-section header-section">
                     <div className="hero-content">
                         <h1 className="hero-title">SecureEnough</h1>
@@ -60,21 +81,21 @@ function MainApp() {
                     </div>
                 </section>
 
-                {/* Password Generator Section */}
+                {/* GENERATOR SECTION - Password generation tool */}
                 <section id="generator" className="snap-section">
                     <div className="container">
                         <PasswordGenerator />
                     </div>
                 </section>
 
-                {/* Password Tester Section */}
+                {/* TESTER SECTION - Password strength analyzer */}
                 <section id="tester" className="snap-section">
                     <div className="container">
                         <PasswordStrengthTester />
                     </div>
                 </section>
 
-                {/* Footer Section */}
+                {/* FOOTER SECTION - About, links, and credits */}
                 <section id="footer" className="snap-section footer-section">
                     <div className="footer-content">
                         <div className="footer-brand">
@@ -83,6 +104,7 @@ function MainApp() {
                         </div>
                         
                         <div className="footer-links">
+                            {/* Quick links to tools */}
                             <div className="footer-column">
                                 <h3>Tools</h3>
                                 <ul>
@@ -92,6 +114,7 @@ function MainApp() {
                                 </ul>
                             </div>
                             
+                            {/* Documentation and resources */}
                             <div className="footer-column">
                                 <h3>Resources</h3>
                                 <ul>
@@ -100,6 +123,7 @@ function MainApp() {
                                 </ul>
                             </div>
                             
+                            {/* Social media connections */}
                             <div className="footer-column">
                                 <h3>Connect</h3>
                                 <ul>
@@ -109,6 +133,7 @@ function MainApp() {
                             </div>
                         </div>
                         
+                        {/* Footer information */}
                         <div className="footer-bottom">
                             <p>&copy; 2025 SecureEnough. Built by DeltaHotelSierra</p>
                             <p className="footer-note">All password checks are performed locally - your data never leaves your device.</p>

@@ -1,18 +1,37 @@
 const { useState, useEffect, useCallback } = React;
 
+/**
+ * PasswordGenerator Component
+ * Generates secure random passwords with customizable options
+ * Users can choose what character types to include and the password length
+ */
 function PasswordGenerator() {
+    // ===== STATE VARIABLES =====
+    // Stores the currently generated password
     const [password, setPassword] = useState('');
+    
+    // Controls the password length (minimum 4, maximum 32)
     const [length, setLength] = useState(12);
+    
+    // Tracks which character types are included in password generation
     const [options, setOptions] = useState({
-        uppercase: true,
-        lowercase: true,
-        numbers: true,
-        special: true
+        uppercase: true,  // A-Z
+        lowercase: true,  // a-z
+        numbers: true,    // 0-9
+        special: true     // !@#$%^&* etc.
     });
+    
+    // Shows "Copied!" message when user copies the password
     const [copied, setCopied] = useState(false);
+    
+    // The strength level text (e.g. "Strong", "Very Weak")
     const [strength, setStrength] = useState('');
+    
+    // Numeric score for password strength (0-100)
     const [strengthScore, setStrengthScore] = useState(0);
 
+    // ===== CHARACTER SETS AND STYLING =====
+    // Maps strength levels to their display colors (red = weak, green = strong)
     const strengthColors = {
         'Very Weak': '#d32f2f',
         'Weak': '#f57c00',
@@ -21,6 +40,7 @@ function PasswordGenerator() {
         'Very Strong': '#388e3c'
     };
 
+    // Defines which characters can be used in each category
     const charSets = {
         uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
         lowercase: 'abcdefghijklmnopqrstuvwxyz',
@@ -28,11 +48,19 @@ function PasswordGenerator() {
         special: '!@#$%^&*()_+-=[]{};\':"|,.<>?/\\`~'
     };
 
+    /**
+     * Generates a random password based on selected options
+     * This function:
+     * 1. Combines all selected character types
+     * 2. Randomly selects characters from the pool
+     * 3. Repeats for the desired length
+     */
     const generatePassword = useCallback(() => {
         let availableChars = '';
         let generatedPassword = '';
         
-        // If no options selected, select all options
+        // Prevent user from deselecting ALL options
+        // If nothing is checked, automatically enable all character types
         if (!options.uppercase 
             && !options.lowercase 
             && !options.numbers
@@ -43,18 +71,18 @@ function PasswordGenerator() {
             options.uppercase = true;
         }
 
-        // Build character set based on selected options
+        // Build the pool of available characters based on user selections
         if (options.uppercase) availableChars += charSets.uppercase;
         if (options.lowercase) availableChars += charSets.lowercase;
         if (options.numbers) availableChars += charSets.numbers;
         if (options.special) availableChars += charSets.special;
 
-        // If no options selected, use all character types
+        // Safety check: if somehow no characters are available, use all types
         if (availableChars === '') {
             availableChars = charSets.uppercase + charSets.lowercase + charSets.numbers + charSets.special;
         }
 
-        // Generate password
+        // Build the password by selecting random characters from the available pool
         for (let i = 0; i < length; i++) {
             const randomIndex = Math.floor(Math.random() * availableChars.length);
             generatedPassword += availableChars[randomIndex];
@@ -64,48 +92,66 @@ function PasswordGenerator() {
         setCopied(false);
     }, [options, length]);
 
+    /**
+     * Copies the generated password to the user's clipboard
+     * Shows a "Copied!" message temporarily
+     */
     const copyToClipboard = async () => {
+        // Don't copy if no password has been generated yet
         if (!password) return;
 
         try {
+            // Use the browser's Clipboard API to copy the password
             await navigator.clipboard.writeText(password);
+            
+            // Show success message
             setCopied(true);
+            
+            // Hide the message after 2 seconds
             setTimeout(() => setCopied(false), 2000);
         } catch (err) {
             console.error('Failed to copy:', err);
         }
     };
 
+    /**
+     * Toggles a character type option on/off
+     * @param {string} option - The option to toggle (e.g., 'uppercase', 'numbers')
+     */
     const handleOptionChange = (option) => {
         setOptions(prev => ({
             ...prev,
-            [option]: !prev[option]
+            [option]: !prev[option]  // Flip the boolean value
         }));
     };
 
+    /**
+     * Evaluates password strength based on various criteria
+     * Calculates a score from 0-100 and assigns a strength level
+     * @param {string} pwd - The password to check
+     * @returns {object} - Contains strength level and score
+     */
     const checkPasswordStrength = (pwd) => {
+        // Return early if password is empty
         if (!pwd) return { strength: '', score: 0 };
 
         let score = 0;
 
-        // Check length
-        if (pwd.length >= 8) score += 20;
-        if (pwd.length >= 12) score += 10;
-        if (pwd.length >= 16) score += 10;
+        // ===== LENGTH SCORING =====
+        // Award points for longer passwords (more resistant to brute force)
+        if (pwd.length >= 8) score += 20;    // 8+ characters
+        if (pwd.length >= 12) score += 10;   // 12+ characters
+        if (pwd.length >= 16) score += 10;   // 16+ characters
 
-        // Check for uppercase
-        if (/[A-Z]/.test(pwd)) score += 15;
+        // ===== CHARACTER TYPE SCORING =====
+        // Award points for variety (each type makes password more secure)
+        if (/[A-Z]/.test(pwd)) score += 15;  // Has uppercase letters
+        if (/[a-z]/.test(pwd)) score += 15;  // Has lowercase letters
+        if (/\d/.test(pwd)) score += 15;     // Has numbers
+        if (/[!@#$%^&*()_+\-=\[\]{};:'",.<>?/\\|`~]/.test(pwd)) score += 15;  // Has special chars
 
-        // Check for lowercase
-        if (/[a-z]/.test(pwd)) score += 15;
-
-        // Check for numbers
-        if (/\d/.test(pwd)) score += 15;
-
-        // Check for special characters
-        if (/[!@#$%^&*()_+\-=\[\]{};:'",.<>?/\\|`~]/.test(pwd)) score += 15;
-
-        // Determine strength level
+        // ===== DETERMINE STRENGTH LEVEL =====
+        // Map score ranges to user-friendly strength descriptions
         let strengthLevel;
         if (score < 30) {
             strengthLevel = 'Very Weak';
@@ -122,6 +168,10 @@ function PasswordGenerator() {
         return { strength: strengthLevel, score };
     };
 
+    // ===== REACT EFFECTS =====
+    // These run automatically when the password changes
+    
+    // Update password strength display whenever the password changes
     useEffect(() => {
         if (password) {
             const result = checkPasswordStrength(password);
@@ -130,27 +180,35 @@ function PasswordGenerator() {
         }
     }, [password]);
 
-    // Generate initial password on mount
+    // Generate a password when the component first loads
     useEffect(() => {
         generatePassword();
     }, []);
 
-    // Auto-regenerate password when length or options change
+    // Re-generate password whenever length or options change
     useEffect(() => {
         generatePassword();
     }, [generatePassword]);
 
+    /**
+     * Replaces one character in the password with a random character from the available set
+     * User can click individual password characters to randomly change them
+     * @param {number} index - Position of the character to replace
+     */
     const editCharacter = useCallback((index) => {
+        // Build the same character pool used in password generation
         let availableChars = '';
         if (options.uppercase) availableChars += charSets.uppercase;
         if (options.lowercase) availableChars += charSets.lowercase;
         if (options.numbers) availableChars += charSets.numbers;
         if (options.special) availableChars += charSets.special;
 
+        // Fallback if no options selected
         if (availableChars === '') {
             availableChars = charSets.uppercase + charSets.lowercase + charSets.numbers + charSets.special;
         }
 
+        // Pick a random character and replace it at the specified index
         const randomIndex = Math.floor(Math.random() * availableChars.length);
         const newChar = availableChars[randomIndex];
         const newPassword = password.substring(0, index) + newChar + password.substring(index + 1);
