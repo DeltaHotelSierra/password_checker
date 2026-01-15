@@ -1744,3 +1744,431 @@ body {
         font-size: 32px;
     }
 }
+
+/* ============================================
+   🎨 COOL BUTTON COLLECTION
+   Modern, animated button styles
+   ============================================ */
+
+/* Base Button Styles */
+.btn {
+    display: inline-block;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-family: inherit;
+    letter-spacing: 0.5px;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 1. Neon Glow Button */
+.btn-neon {
+    background: rgba(97, 220, 163, 0.1);
+    color: #61dca3;
+    border: 2px solid #61dca3;
+    text-shadow: 0 0 10px rgba(97, 220, 163, 0.5);
+    box-shadow: 0 0 20px rgba(97, 220, 163, 0.2),
+                inset 0 0 20px rgba(97, 220, 163, 0.1);
+}
+
+.btn-neon:hover {
+    background: rgba(97, 220, 163, 0.2);
+    box-shadow: 0 0 30px rgba(97, 220, 163, 0.6),
+                0 0 60px rgba(97, 220, 163, 0.4),
+                inset 0 0 30px rgba(97, 220, 163, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-neon:active {
+    transform: translateY(0);
+}
+
+/* 2. Gradient Shift Button */
+.btn-gradient {
+    background: linear-gradient(135deg, #61dca3 0%, #4CAF50 50%, #61b3dc 100%);
+    background-size: 200% 200%;
+    color: #0a0a0a;
+    border: none;
+    font-weight: 700;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.btn-gradient:hover {
+    box-shadow: 0 8px 25px rgba(97, 220, 163, 0.4);
+    transform: translateY(-3px);
+}
+
+.btn-gradient:active {
+    transform: translateY(-1px);
+}
+
+/* 3. Glass Morphism Button */
+.btn-glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.btn-glass:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(97, 220, 163, 0.5);
+    box-shadow: 0 8px 32px rgba(97, 220, 163, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-glass:active {
+    transform: translateY(0);
+}
+
+/* 4. Ripple Effect Button */
+.btn-ripple {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-ripple::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-ripple:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-ripple:hover {
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+}
+
+/* 5. 3D Button */
+.btn-3d {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    box-shadow: 0 6px 0 #c23b4a,
+                0 10px 20px rgba(0, 0, 0, 0.4);
+    border: none;
+    font-weight: 700;
+}
+
+.btn-3d:hover {
+    box-shadow: 0 4px 0 #c23b4a,
+                0 8px 15px rgba(0, 0, 0, 0.4);
+    transform: translateY(2px);
+}
+
+.btn-3d:active {
+    box-shadow: 0 2px 0 #c23b4a,
+                0 4px 10px rgba(0, 0, 0, 0.4);
+    transform: translateY(4px);
+}
+
+/* 6. Outline Button */
+.btn-outline {
+    background: transparent;
+    color: #61dca3;
+    border: 2px solid #61dca3;
+}
+
+.btn-outline:hover {
+    background: #61dca3;
+    color: #0a0a0a;
+    box-shadow: 0 0 20px rgba(97, 220, 163, 0.5);
+    transform: scale(1.05);
+}
+
+.btn-outline:active {
+    transform: scale(0.98);
+}
+
+/* 7. Shimmer Button */
+.btn-shimmer {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-shimmer::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+    background: linear-gradient(to bottom, 
+                rgba(229, 172, 142, 0), 
+                rgba(255, 255, 255, 0.5) 50%, 
+                rgba(229, 172, 142, 0));
+    transform: rotateZ(60deg) translate(-5em, 7.5em);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: rotateZ(60deg) translate(-5em, 7.5em);
+    }
+    100% {
+        transform: rotateZ(60deg) translate(12em, -10em);
+    }
+}
+
+.btn-shimmer:hover {
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+/* 8. Pulse Button */
+.btn-pulse {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(245, 87, 108, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(245, 87, 108, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(245, 87, 108, 0);
+    }
+}
+
+.btn-pulse:hover {
+    animation: pulse 1s infinite;
+}
+
+/* 9. Icon Button */
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(97, 220, 163, 0.15);
+    color: #61dca3;
+    border: 1px solid rgba(97, 220, 163, 0.3);
+}
+
+.btn-icon svg,
+.btn-icon i {
+    transition: transform 0.3s ease;
+}
+
+.btn-icon:hover {
+    background: rgba(97, 220, 163, 0.25);
+    border-color: #61dca3;
+    box-shadow: 0 5px 20px rgba(97, 220, 163, 0.3);
+}
+
+.btn-icon:hover svg,
+.btn-icon:hover i {
+    transform: scale(1.2);
+}
+
+/* 10. Liquid Button */
+.btn-liquid {
+    background: #61dca3;
+    color: #0a0a0a;
+    position: relative;
+    border: none;
+    overflow: hidden;
+}
+
+.btn-liquid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: left 0.5s ease;
+}
+
+.btn-liquid:hover::before {
+    left: 100%;
+}
+
+.btn-liquid:hover {
+    box-shadow: 0 8px 25px rgba(97, 220, 163, 0.5);
+    transform: translateY(-2px);
+}
+
+/* 11. Split Button */
+.btn-split {
+    background: linear-gradient(90deg, #61dca3 50%, #4CAF50 50%);
+    background-size: 200% 100%;
+    background-position: right;
+    color: white;
+    transition: background-position 0.3s ease;
+}
+
+.btn-split:hover {
+    background-position: left;
+    box-shadow: 0 5px 20px rgba(97, 220, 163, 0.4);
+}
+
+/* 12. Cyberpunk Button */
+.btn-cyber {
+    background: #0a0a0a;
+    color: #61dca3;
+    border: 2px solid #61dca3;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.btn-cyber:hover {
+    background: #61dca3;
+    color: #0a0a0a;
+    box-shadow: 0 0 30px rgba(97, 220, 163, 0.7),
+                inset 0 0 30px rgba(97, 220, 163, 0.3);
+}
+
+/* 13. Bounce Button */
+.btn-bounce {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-bounce:hover {
+    animation: bounce 0.5s ease;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    25% { transform: translateY(-10px); }
+    75% { transform: translateY(-5px); }
+}
+
+/* 14. Neumorphism Button */
+.btn-neuro {
+    background: #2a2a2a;
+    color: #61dca3;
+    border: none;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5),
+                -8px -8px 15px rgba(60, 60, 60, 0.3);
+}
+
+.btn-neuro:hover {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5),
+                -5px -5px 10px rgba(60, 60, 60, 0.3);
+}
+
+.btn-neuro:active {
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.5),
+                inset -5px -5px 10px rgba(60, 60, 60, 0.3);
+}
+
+/* 15. Holographic Button */
+.btn-holo {
+    background: linear-gradient(135deg, 
+                #667eea 0%, 
+                #764ba2 25%, 
+                #f093fb 50%, 
+                #764ba2 75%, 
+                #667eea 100%);
+    background-size: 400% 400%;
+    color: white;
+    animation: holoShift 3s ease infinite;
+    font-weight: 700;
+}
+
+@keyframes holoShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.btn-holo:hover {
+    box-shadow: 0 0 40px rgba(102, 126, 234, 0.6),
+                0 0 80px rgba(118, 75, 162, 0.4);
+    transform: scale(1.05);
+}
+
+/* Button Sizes */
+.btn-sm {
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+.btn-md {
+    padding: 14px 32px;
+    font-size: 16px;
+}
+
+.btn-lg {
+    padding: 18px 40px;
+    font-size: 18px;
+}
+
+.btn-xl {
+    padding: 22px 50px;
+    font-size: 20px;
+}
+
+/* Button Groups */
+.btn-group {
+    display: inline-flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-group .btn {
+    flex: 1;
+    min-width: fit-content;
+}
+
+/* Responsive Buttons */
+@media (max-width: 768px) {
+    .btn {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+
+    .btn-lg {
+        padding: 16px 32px;
+        font-size: 16px;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+    .btn-group .btn {
+        width: 100%;
+    }
+}

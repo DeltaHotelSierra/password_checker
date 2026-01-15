@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cool Buttons Showcase - SecureEnough</title>
+    <link rel="stylesheet" href="public/styles.css" />
+    <style>
+      .showcase-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        background: #0a0a0a;
+        min-height: 100vh;
+      }
+
+      .showcase-header {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      .showcase-header h1 {
+        font-size: 48px;
+        background: linear-gradient(
+          135deg,
+          #61dca3 0%,
+          #4caf50 50%,
+          #61b3dc 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 15px;
+      }
+
+      .showcase-header p {
+        color: #888;
+        font-size: 18px;
+      }
+
+      .button-section {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 40px;
+        margin-bottom: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .button-section h2 {
+        color: #61dca3;
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+
+      .button-section p {
+        color: #999;
+        margin-bottom: 25px;
+        font-size: 14px;
+      }
+
+      .button-demo {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .code-snippet {
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(97, 220, 163, 0.2);
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 15px;
+        overflow-x: auto;
+      }
+
+      .code-snippet code {
+        color: #61dca3;
+        font-family: "Courier New", monospace;
+        font-size: 14px;
+        white-space: pre;
+      }
+
+      .size-demo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 768px) {
+        .showcase-header h1 {
+          font-size: 36px;
+        }
+
+        .button-section {
+          padding: 25px;
+        }
+
+        .button-demo {
+          flex-direction: column;
+        }
+
+        .button-demo .btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="showcase-container">
+      <div class="showcase-header">
+        <h1>🎨 Cool Buttons Collection</h1>
+        <p>15 modern, animated button styles ready to use</p>
+        <a href="index.html" class="btn btn-outline">← Back to App</a>
+      </div>
+
+      <!-- Neon Glow Button -->
+      <div class="button-section">
+        <h2>1. Neon Glow Button</h2>
+        <p>Futuristic glowing effect perfect for cyberpunk themes</p>
+        <div class="button-demo">
+          <button class="btn btn-neon">Neon Glow</button>
+          <button class="btn btn-neon btn-lg">Large Neon</button>
+          <button class="btn btn-neon btn-sm">Small Neon</button>
+        </div>
+        <div class="code-snippet">
+          <code
+            >&lt;button class="btn btn-neon"&gt;Neon Glow&lt;/button&gt;</code
+          >
+        </div>
+      </div>
+
+      <!-- Gradient Shift Button -->
+      <div class="button-section">
+        <h2>2. Gradient Shift Button</h2>
+        <p>Animated gradient that shifts smoothly</p>
+        <div class="button-demo">
+          <button class="btn btn-gradient">Gradient Shift</button>
+          <button class="btn btn-gradient btn-lg">Large Gradient</button>
+          <button class="btn btn-gradient btn-sm">Small Gradient</button>
+        </div>
+        <div class="code-snippet">
+          <code
+            >&lt;button class="btn btn-gradient"&gt;Gradient
+            Shift&lt;/button&gt;</code
+          >
+        </div>
+      </div>
+
+      <!-- Glass Morphism Button -->
+      <div class="button-section">
+        <h2>3. Glass Morphism Button</h2>
+        <p>Modern frosted glass effect with backdrop blur</p>
+        <div class="button-demo">
+          <button class="btn btn-glass">Glass Effect</button>
+          <button class="btn btn-glass btn-lg">Large Glass</button>
+          <button class="btn btn-glass btn-sm">Small Glass</button>
+        </div>
+        <div class="code-snippet">
+          <code
+            >&lt;button class="btn btn-glass"&gt;Glass
+            Effect&lt;/button&gt;</code
+          >
+        </div>
+      </div>
+
+      <!-- Ripple Effect Button -->
+      <div class="button-section">
+        <h2>4. Ripple Effect Button</h2>
+        <p>Water ripple animation on hover</p>
+        <div class="button-demo">
+          <button class="btn btn-ripple">Ripple Effect</button>
+          <button class="btn btn-ripple btn-lg">Large Ripple</button>
+          <button class="btn btn-ripple btn-sm">Small Ripple</button>
+        </div>
+        <div class="code-snippet">
+          <code
+            >&lt;button class="btn btn-ripple"&gt;Ripple
+            Effect&lt;/button&gt;</code
+          >
+        </div>
+      </div>
+
+      <!-- 3D Button -->
+      <div class="button-section">
+        <h2>5. 3D Button</h2>
+        <p>Physical depth with realistic shadow</p>
+        <div class="button-demo">
+          <button class="btn btn-3d">3D Button</button>
+          <button class="btn btn-3d btn-lg">Large 3D</button>
+          <button class="btn btn-3d btn-sm">Small 3D</button>
+        </div>
+        <div class="code-snippet">
+          <code>&lt;button class="btn btn-3d"&gt;3D Button&lt;/button&gt;</code>
+        </div>
+      </div>
+
+      <!-- Outline Button -->
+      <div class="button-section">
+        <h2>6. Outline Button</h2>
+        <p>Clean outline that fills on hover</p>
+        <div class="button-demo">
+          <button class="btn btn-outline">Outline Button</button>
+          <button class="btn btn-outline btn-lg">Large Outline</button>
+          <button class="btn btn-outline btn-sm">Small Outline</button>
+        </div>
+        <div class="code-snippet">
+          <code
+            >&lt;button class="btn btn-outline"&gt;Outline
+            Button&lt;/button&gt;</code
+          >
+        </div>
+      </div>
+
+      <!-- Shimmer Button -->
+      <div class="button-section">
+        <h2>7. Shimmer Button</h2>
+        <p>Light shimmer effect that continuously animates</p>
+        <div class="button-demo">
+          <button class="btn btn-shimmer">Shimmer Effect</button>
+          <button class="btn btn-shimmer btn-lg">Large Shimmer</button>
+          <button class="btn btn-shimmer btn-sm">Small Shimmer</button>
+        </div>
+        <div class="code-snippet">
+          <code
+            >&lt;button class="btn btn-shimmer"&gt;Shimmer
+            Effect&lt;/button&gt;</code
+          >
+        </div>
+      </div>
+
+      <!-- Pulse Button -->
+      <div class="button-section">
+        <h2>8. Pulse Button</h2>
+        <p>Attention-grabbing pulse animation</p>
+        <div class="button-demo">
+          <button class="btn btn-pulse">Pulse Button</button>
+          <button class="btn btn-pulse btn-lg">Large Pulse</button>
+          <button class="btn btn-pulse btn-sm">Small Pulse</button>
+        </div>
+        <div class="code-snippet">
+          <code
+            >&lt;button class="btn btn-pulse"&gt;Pulse
+            Button&lt;/button&gt;</code
+          >
+        </div>
+      </div>
+
+      <!-- Icon Button -->
+      <div class="button-section">
+        <h2>9. Icon Button</h2>
+        <p>Button with icon support</p>
+        <div class="button-demo">
+          <button class="btn btn-icon">
+            <span>🔐</span>
+            <span>Secure Login</span>
+          </button>
+          <button class="btn btn-icon btn-lg">
+            <span>⚡</span>
+            <span>Fast Action</span>
+          </button>
+          <button class="btn btn-icon btn-sm">
+            <span>✓</span>
+            <span>Done</span>
+          </button>
+        </div>
+        <div class="code-snippet">
+          <code
+            >&lt;button class="btn btn-icon"&gt; &lt;span&gt;🔐&lt;/span&gt;
+            &lt;span&gt;Secure Login&lt;/span&gt; &lt;/button&gt;</code
+          >
+        </div>
+      </div>
+
+      <!-- Liquid Button -->
+      <div class="button-section">
+        <h2>10. Liquid Button</h2>
+        <p>Liquid wave transition effect</p>
+        <div class="button-demo">
+          <button class="btn btn-liquid">Liquid Wave</button>
+          <button class="btn btn-liquid btn-lg">Large Liquid</button>
+          <button class="btn btn-liquid btn-sm">Small Liquid</button>
+        </div>
+        <div class="code-snippet">
+          <code
+            >&lt;button class="btn btn-liquid"&gt;Liquid
+            Wave&lt;/button&gt;</code
+          >
+        </div>
+      </div>
+
+      <!-- Split Button -->
+      <div class="button-section">
+        <h2>11. Split Button</h2>
+        <p>Two-tone split color transition</p>
+        <div class="button-demo">
+          <button class="btn btn-split">Split Color</button>
+          <button class="btn btn-split btn-lg">Large Split</button>
+          <button class="btn btn-split btn-sm">Small Split</button>
+        </div>
+        <div class="code-snippet">
+          <code
+            >&lt;button class="btn btn-split"&gt;Split
+            Color&lt;/button&gt;</code
+          >
+        </div>
+      </div>
+
+      <!-- Cyberpunk Button -->
+      <div class="button-section">
+        <h2>12. Cyberpunk Button</h2>
+        <p>Futuristic clipped edges and neon styling</p>
+        <div class="button-demo">
+          <button class="btn btn-cyber">Cyberpunk</button>
+          <button class="btn btn-cyber btn-lg">Large Cyber</button>
+          <button class="btn btn-cyber btn-sm">Small Cyber</button>
+        </div>
+        <div class="code-snippet">
+          <code
+            >&lt;button class="btn btn-cyber"&gt;Cyberpunk&lt;/button&gt;</code
+          >
+        </div>
+      </div>
+
+      <!-- Bounce Button -->
+      <div class="button-section">
+        <h2>13. Bounce Button</h2>
+        <p>Playful bounce animation on hover</p>
+        <div class="button-demo">
+          <button class="btn btn-bounce">Bounce Effect</button>
+          <button class="btn btn-bounce btn-lg">Large Bounce</button>
+          <button class="btn btn-bounce btn-sm">Small Bounce</button>
+        </div>
+        <div class="code-snippet">
+          <code
+            >&lt;button class="btn btn-bounce"&gt;Bounce
+            Effect&lt;/button&gt;</code
+          >
+        </div>
+      </div>
+
+      <!-- Neumorphism Button -->
+      <div class="button-section">
+        <h2>14. Neumorphism Button</h2>
+        <p>Soft UI design with shadow depth</p>
+        <div class="button-demo">
+          <button class="btn btn-neuro">Neumorphism</button>
+          <button class="btn btn-neuro btn-lg">Large Neuro</button>
+          <button class="btn btn-neuro btn-sm">Small Neuro</button>
+        </div>
+        <div class="code-snippet">
+          <code
+            >&lt;button class="btn
+            btn-neuro"&gt;Neumorphism&lt;/button&gt;</code
+          >
+        </div>
+      </div>
+
+      <!-- Holographic Button -->
+      <div class="button-section">
+        <h2>15. Holographic Button</h2>
+        <p>Multi-color shifting holographic effect</p>
+        <div class="button-demo">
+          <button class="btn btn-holo">Holographic</button>
+          <button class="btn btn-holo btn-lg">Large Holo</button>
+          <button class="btn btn-holo btn-sm">Small Holo</button>
+        </div>
+        <div class="code-snippet">
+          <code
+            >&lt;button class="btn btn-holo"&gt;Holographic&lt;/button&gt;</code
+          >
+        </div>
+      </div>
+
+      <!-- Size Comparison -->
+      <div class="button-section">
+        <h2>Size Variations</h2>
+        <p>All buttons support multiple sizes</p>
+        <div class="size-demo">
+          <button class="btn btn-gradient btn-sm">Small (btn-sm)</button>
+          <button class="btn btn-gradient btn-md">
+            Medium (btn-md / default)
+          </button>
+          <button class="btn btn-gradient btn-lg">Large (btn-lg)</button>
+          <button class="btn btn-gradient btn-xl">Extra Large (btn-xl)</button>
+        </div>
+        <div class="code-snippet">
+          <code
+            >&lt;button class="btn btn-gradient btn-sm"&gt;Small&lt;/button&gt;
+            &lt;button class="btn btn-gradient"&gt;Medium&lt;/button&gt;
+            &lt;button class="btn btn-gradient btn-lg"&gt;Large&lt;/button&gt;
+            &lt;button class="btn btn-gradient btn-xl"&gt;Extra
+            Large&lt;/button&gt;</code
+          >
+        </div>
+      </div>
+
+      <!-- Button Groups -->
+      <div class="button-section">
+        <h2>Button Groups</h2>
+        <p>Easily group buttons together</p>
+        <div class="btn-group">
+          <button class="btn btn-outline">Cancel</button>
+          <button class="btn btn-glass">Save</button>
+          <button class="btn btn-gradient">Submit</button>
+        </div>
+        <div class="code-snippet">
+          <code
+            >&lt;div class="btn-group"&gt; &lt;button class="btn
+            btn-outline"&gt;Cancel&lt;/button&gt; &lt;button class="btn
+            btn-glass"&gt;Save&lt;/button&gt; &lt;button class="btn
+            btn-gradient"&gt;Submit&lt;/button&gt; &lt;/div&gt;</code
+          >
+        </div>
+      </div>
+
+      <!-- Mixed Examples -->
+      <div class="button-section">
+        <h2>Mixed Example</h2>
+        <p>Combine different styles for your needs</p>
+        <div class="btn-group">
+          <button class="btn btn-neon btn-lg">🎯 Primary Action</button>
+          <button class="btn btn-glass">⚙️ Settings</button>
+          <button class="btn btn-outline">ℹ️ Info</button>
+        </div>
+      </div>
+
+      <div class="button-section" style="text-align: center; margin-top: 50px">
+        <h2>Ready to Use!</h2>
+        <p>Copy any button class and start using them in your project</p>
+        <div class="btn-group" style="justify-content: center">
+          <a href="index.html" class="btn btn-gradient btn-lg">
+            🏠 Back to App
+          </a>
+          <a href="docs/CODE_STRUCTURE.md" class="btn btn-glass btn-lg">
+            📚 Documentation
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Add click feedback to all buttons
+      document.querySelectorAll(".btn").forEach((button) => {
+        button.addEventListener("click", function (e) {
+          if (
+            !this.classList.contains("btn-pulse") &&
+            !this.classList.contains("btn-shimmer") &&
+            !this.classList.contains("btn-gradient") &&
+            !this.classList.contains("btn-holo")
+          ) {
+            this.style.transform = "scale(0.95)";
+            setTimeout(() => {
+              this.style.transform = "";
+            }, 100);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

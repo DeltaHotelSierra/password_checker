@@ -3,8 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="SecureEnough - A modern password generator and strength tester. Create secure passwords and analyze their strength."
+    />
+    <meta
+      name="keywords"
+      content="password generator, password strength, security, password tester"
+    />
+    <meta name="author" content="DeltaHotelSierra" />
     <title>SecureEnough - Password Generator & Strength Tester</title>
-    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="public/styles.css" />
 
     <!-- React and Babel CDN -->
     <script
@@ -20,14 +38,21 @@
   <body>
     <div id="root"></div>
 
-    <!-- Letter Glitch Background Component -->
-    <script type="text/babel" src="LetterGlitch.js"></script>
+    <!-- Utilities -->
+    <script type="text/babel" src="src/utils/passwordStrength.js"></script>
 
     <!-- React Components -->
-    <script type="text/babel" src="PasswordGenerator.jsx"></script>
-    <script type="text/babel" src="PasswordStrengthTester.jsx"></script>
-    <script type="text/babel" src="SecurityTips.jsx"></script>
-    <script type="text/babel" src="MainApp.jsx"></script>
+    <script type="text/babel" src="src/components/LetterGlitch.js"></script>
+    <script
+      type="text/babel"
+      src="src/components/PasswordGenerator.jsx"
+    ></script>
+    <script
+      type="text/babel"
+      src="src/components/PasswordStrengthTester.jsx"
+    ></script>
+    <script type="text/babel" src="src/components/SecurityTips.jsx"></script>
+    <script type="text/babel" src="src/components/MainApp.jsx"></script>
 
     <!-- Initialize App -->
     <script type="text/babel">
