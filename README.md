@@ -60,16 +60,6 @@ A modern, professional web-based password strength tester and generator with an 
 - 💬 **Interactive Learning** - Click tip cards for detailed explanations
 - 📖 **Modal Popups** - Comprehensive security information with examples
 
-### ✨ Animated Background
-
-- **Letter Glitch Animation** - Matrix-style animated background
-- Customizable colors (teal/green theme)
-- Smooth opacity transitions
-- Outer vignette effect for focus
-- Fully responsive canvas animation
-
-## 🚀 Getting Started
-
 ### Requirements
 
 - Modern web browser (Chrome, Firefox, Safari, Edge)
