@@ -1,13 +1,13 @@
 /**
  * Password Strength Utilities
- * Shared password validation and strength calculation logic
- * Used by both PasswordGenerator and PasswordStrengthTester components
+ * Shared password validation and strength calculation logic.
+ * All functions are exposed via the global `PasswordUtils` namespace.
  */
 
 /**
- * Character sets for password generation
+ * Character sets for password generation.
  */
-export const charSets = {
+const charSets = {
     uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     lowercase: 'abcdefghijklmnopqrstuvwxyz',
     numbers: '0123456789',
@@ -15,9 +15,9 @@ export const charSets = {
 };
 
 /**
- * Strength level to color mapping
+ * Strength level to color mapping.
  */
-export const strengthColors = {
+const strengthColors = {
     'Very Weak': '#d32f2f',
     'Weak': '#f57c00',
     'Medium': '#fbc02d',
@@ -26,11 +26,11 @@ export const strengthColors = {
 };
 
 /**
- * Calculate password entropy (measure of randomness)
- * @param {string} password - The password to analyze
- * @returns {number} - Entropy in bits
+ * Calculate password entropy (measure of randomness).
+ * @param {string} password
+ * @returns {number} Entropy in bits.
  */
-export const calculateEntropy = (password) => {
+const calculateEntropy = (password) => {
     if (!password) return 0;
     
     let poolSize = 0;
@@ -44,11 +44,11 @@ export const calculateEntropy = (password) => {
 };
 
 /**
- * Check for common password patterns
- * @param {string} password - The password to check
- * @returns {array} - Array of detected patterns
+ * Check for common password patterns.
+ * @param {string} password
+ * @returns {string[]} Array of detected pattern names.
  */
-export const detectPatterns = (password) => {
+const detectPatterns = (password) => {
     const patterns = [];
     const lowerPwd = password.toLowerCase();
     
@@ -77,12 +77,11 @@ export const detectPatterns = (password) => {
 };
 
 /**
- * Evaluate password strength based on multiple criteria
- * Returns strength level, numerical score, criteria met, and additional info
- * @param {string} password - Password to analyze
- * @returns {object} - { strength, score, criteriaMet, entropy, patterns, timeToCrack }
+ * Evaluate password strength based on multiple criteria.
+ * @param {string} password
+ * @returns {{ strength: string, score: number, criteriaMet: object, entropy: number, patterns: string[], timeToCrack: string }}
  */
-export const checkPasswordStrength = (password) => {
+const checkPasswordStrength = (password) => {
     let score = 0;
     const criteriaMet = {
         length: false,
@@ -186,12 +185,12 @@ const estimateTimeToCrack = (entropy) => {
 };
 
 /**
- * Generate a secure random password
- * @param {number} length - Password length
- * @param {object} options - Character type options { uppercase, lowercase, numbers, special }
- * @returns {string} - Generated password
+ * Generate a cryptographically secure random password.
+ * @param {number} length
+ * @param {{ uppercase?: boolean, lowercase?: boolean, numbers?: boolean, special?: boolean }} options
+ * @returns {string} Generated password.
  */
-export const generatePassword = (length = 12, options = {}) => {
+const generatePassword = (length = 12, options = {}) => {
     const {
         uppercase = true,
         lowercase = true,
@@ -200,35 +199,36 @@ export const generatePassword = (length = 12, options = {}) => {
     } = options;
 
     let availableChars = '';
-    
-    // Build character pool
+
     if (uppercase) availableChars += charSets.uppercase;
     if (lowercase) availableChars += charSets.lowercase;
-    if (numbers) availableChars += charSets.numbers;
-    if (special) availableChars += charSets.special;
+    if (numbers)   availableChars += charSets.numbers;
+    if (special)   availableChars += charSets.special;
 
-    // Fallback to all characters if none selected
-    if (availableChars === '') {
-        availableChars = charSets.uppercase + charSets.lowercase + 
-                        charSets.numbers + charSets.special;
+    // Fallback to all characters if none selected.
+    if (!availableChars) {
+        availableChars = charSets.uppercase + charSets.lowercase +
+                         charSets.numbers + charSets.special;
     }
 
-    // Generate password
+    // Use cryptographically secure random values.
+    const randomValues = new Uint32Array(length);
+    crypto.getRandomValues(randomValues);
+
     let password = '';
     for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * availableChars.length);
-        password += availableChars[randomIndex];
+        password += availableChars[randomValues[i] % availableChars.length];
     }
 
     return password;
 };
 
 /**
- * Copy text to clipboard
- * @param {string} text - Text to copy
- * @returns {Promise<boolean>} - Success status
+ * Copy text to the clipboard.
+ * @param {string} text
+ * @returns {Promise<boolean>} True on success.
  */
-export const copyToClipboard = async (text) => {
+const copyToClipboard = async (text) => {
     try {
         await navigator.clipboard.writeText(text);
         return true;
@@ -239,11 +239,26 @@ export const copyToClipboard = async (text) => {
 };
 
 /**
- * Validate password meets all criteria
- * @param {string} password - Password to validate
- * @returns {boolean} - True if all criteria met
+ * Validate that a password meets all criteria.
+ * @param {string} password
+ * @returns {boolean}
  */
-export const isPasswordValid = (password) => {
+const isPasswordValid = (password) => {
     const { criteriaMet } = checkPasswordStrength(password);
     return Object.values(criteriaMet).every(met => met === true);
+};
+
+/**
+ * Global namespace — exposes all utilities to other scripts loaded on the page.
+ * Components access these as `PasswordUtils.checkPasswordStrength(...)` etc.
+ */
+window.PasswordUtils = {
+    charSets,
+    strengthColors,
+    calculateEntropy,
+    detectPatterns,
+    checkPasswordStrength,
+    generatePassword,
+    copyToClipboard,
+    isPasswordValid,
 };
